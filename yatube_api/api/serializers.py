@@ -34,17 +34,19 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
-        slug_field='username', read_only=True,
+        slug_field='username',
+        read_only=True,
         default=CurrentUserDefault()
     )
     following = serializers.SlugRelatedField(
-        slug_field='username', queryset=User.objects.all()
+        slug_field='username',
+        queryset=User.objects.all()
     )
 
     def validate_following(self, value):
         if value == self.context['request'].user:
             raise serializers.ValidationError(
-                'Подписка не может быть оформлена на самого себя.'
+                'Нельзя подписаться на самого себя!'
             )
         return value
 

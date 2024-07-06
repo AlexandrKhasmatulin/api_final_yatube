@@ -20,10 +20,10 @@ class Group(models.Model):
 class Follow(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='following',
-        verbose_name='Пользователь, оформивший подписку')
+        verbose_name='Пользователь')
     following = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='followers',
-        verbose_name='Подписка пользователя')
+        verbose_name='Подписки пользователя')
 
     class Meta:
         verbose_name = 'подписка'
