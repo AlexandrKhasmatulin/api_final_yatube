@@ -53,10 +53,8 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Follow)
 class FollowAdmin(admin.ModelAdmin):
-    list_display = (
-        'user', 'following',
-    )
-    search_fields = ('user',)
+    list_display = ('user', 'following')
+    search_fields = ('user__username',)
     list_filter = ('user', 'following')
     list_display_links = ('user',)
     list_select_related = ('user', 'following')
@@ -68,9 +66,9 @@ class FollowInline(admin.StackedInline):
     fk_name = 'user'
 
 
-class CustomUserAdmin(UserAdmin):
+class UserAdmin(UserAdmin):
     inlines = (FollowInline,)
 
 
 admin.site.unregister(User)
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(User, UserAdmin)
