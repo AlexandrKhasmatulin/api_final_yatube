@@ -98,4 +98,6 @@ class Comment(models.Model):
         ordering = ('created',)
 
     def __str__(self):
-        return f'Комментарий от {self.author} к посту "{self.post}" - {self.text[:MAX_TITLE_LENGTH]}'
+        return (f'Комментарий от {self.author}'
+                f' к посту "{self.post}" - '
+                f'{self.text[:MAX_TITLE_LENGTH]}')
